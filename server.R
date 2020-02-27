@@ -1,49 +1,26 @@
+library(shinydashboard)
 shinyServer(function(input, output, session) {
 #### UI code --------------------------------------------------------------
   output$ui <- renderUI({
     if (user_input$authenticated == FALSE) {
       ##### UI code for login page
-      fluidPage(
-        fluidRow(
+      
           column(width = 2, offset = 5,
-            br(), br(), br(), br(),
-            uiOutput("uiLogin"),
-            uiOutput("pass")
+                 br(), br(), br(), br(),
+                 uiOutput("uiLogin"),
+                 uiOutput("pass")
           )
-        )
-      )
+        
     } else {
       #### Your app's UI code goes here!
-      fluidPage(
-        fluidRow(
-          # Slider input
-          column(width = 4, offset = 5,
-          br(), br(),
-          uiOutput("obs"),
-          br(), br()
-          )
-        ),
-        fluidRow(
-          # Histogram output
-          plotOutput("distPlot")
-        )
-      )
+     "There is stuff here WOW!"
     }
   })
   
 #### YOUR APP'S SERVER CODE GOES HERE ----------------------------------------
-  # slider input widget
-  output$obs <- renderUI({
-    sliderInput("obs", "Number of observations:", 
-                min = 1, max = 1000, value = 500)
-  })
 
-  # render histogram once slider input value exists
-  output$distPlot <- renderPlot({
-    req(input$obs)
-    hist(rnorm(input$obs), main = "")
-  })
-    
+
+
 #### PASSWORD server code ---------------------------------------------------- 
   # reactive value containing user's authentication status
   user_input <- reactiveValues(authenticated = FALSE, valid_credentials = FALSE, 
